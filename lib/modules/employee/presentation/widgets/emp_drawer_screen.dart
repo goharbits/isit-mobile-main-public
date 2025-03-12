@@ -1,0 +1,180 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:isit_app/common/screens/schedule/week_days_time_screen.dart';
+import 'package:isit_app/constants/app_colors.dart';
+
+import '../../../../app/auth/forget_password_screen.dart';
+import '../../../../app/routes/app_routes.dart';
+import '../../../../common/custom_drawer_listtile.dart';
+import '../../../../common/screens/rating_review/rating_and_review_screen.dart';
+import '../../../../common/text_styles.dart';
+import '../../../../constants/app_fonts.dart';
+import '../../../../constants/app_sizes.dart';
+
+class EmpDrawerScreen extends StatelessWidget {
+  const EmpDrawerScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipRRect(
+      borderRadius: BorderRadius.only(
+        topRight: Radius.circular(30.r),
+        bottomRight: Radius.circular(30.r),
+      ),
+      child: Drawer(
+        child: Stack(
+          clipBehavior: Clip.none,
+          children: [
+            Container(
+              padding: EdgeInsets.only(left: 15.w, top: 60.h),
+              decoration: BoxDecoration(
+                color: AppColors.darkBlue,
+              ),
+              child: Stack(
+                //clipBehavior: Clip.none,
+                children: [
+                  ListView(
+                    padding: EdgeInsets.zero,
+                    children: [
+                      SizedBox(
+                        height: AppSize.s30,
+                      ),
+                      Container(
+                        padding: EdgeInsets.only(left: 10.w),
+                        decoration: BoxDecoration(
+                          color: AppColors.darkBlue,
+                        ),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              height: AppSize.s50.h,
+                              width: AppSize.s50.w,
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                BorderRadius.circular(AppSize.s10.r),
+                                border: Border.all(
+                                  color: AppColors.darkBlue,
+                                  width: AppSize.s1.w,
+                                ),
+                              ),
+                              child: CircleAvatar(
+                                radius: 50.r,
+                                backgroundColor: Colors.white,
+                                child: Icon(
+                                  Icons.person,
+                                  size: 40,
+                                  color: AppColors.grey,
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              width: AppSize.s15.w,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(
+                                  height: 5.w,
+                                ),
+                                Text(
+                                  'John Doe',
+                                  style: getBoldStyle(
+                                    color: AppColors.white,
+                                    fontSize: FontSize.s16,
+                                  ),
+                                ),
+                                Text(
+                                  'Lorem Ipsum',
+                                  style: getRegularStyle(
+                                    fontSize: FontSize.s12,
+                                    color: AppColors.white,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: AppSize.s20.h,
+                      ),
+                      CustomDrawerListtile(
+                          icon: Icons.design_services,
+                          text: 'My Services',
+                          onPress: () {
+                            //Get.toNamed(AppRoutes.myServicesProScreen);
+                          }),
+                      CustomDrawerListtile(
+                          icon: Icons.star,
+                          text: 'Rating And Review',
+                          onPress: () {
+                            Get.to(() => RatingAndReviewScreen());
+                            //Get.toNamed(AppRoutes.proRatingAndReviewScreen);
+                          }),
+                      CustomDrawerListtile(
+                          icon: Icons.calendar_month,
+                          text: 'My Schedule',
+                          onPress: () {
+                            Get.to(() => WeekDaysTimeScreen());
+                          }),
+                      CustomDrawerListtile(
+                          icon: Icons.lock,
+                          text: 'Change Password',
+                          onPress: () {
+                            Get.to(() => AppForgetPasswordScreen(
+                                title: "Password Change"));
+                          }),
+                      CustomDrawerListtile(
+                          icon: Icons.chrome_reader_mode,
+                          text: 'Subscription',
+                          onPress: () {
+                            //  Get.toNamed(AppRoutes.proSubscriptionScreen);
+                          }),
+                      CustomDrawerListtile(
+                          icon: Icons.settings,
+                          text: 'Settings',
+                          onPress: () {
+                            Get.toNamed(AppRoutes.settingsScreen);
+                          }),
+
+                      SizedBox(
+                        height: AppSize.s20.h,
+                      ),
+                      CustomDrawerListtile(
+                          icon: Icons.logout,
+                          text: 'Logout',
+                          onPress: () {
+                            Get.offAndToNamed(AppRoutes.appSignIn);
+                            //   Get.toNamed(AppRoutes.appSignIn);
+                          }),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            // Positioned(
+            //   top: 60.h,
+            //   right: -20.w, // Half of the CircleAvatar's width
+            //   child: GestureDetector(
+            //     onTap: () {
+            //       Get.back();
+            //     },
+            //     child: CircleAvatar(
+            //       radius: AppSize.s20.r,
+            //       backgroundColor: AppColors.darkBlue,
+            //       child: Icon(
+            //         Icons.arrow_back_ios,
+            //         size: AppSize.s30, // Size of the arrow icon
+            //         color: Colors.white,
+            //       ),
+            //     ),
+            //   ),
+            // ),
+          ],
+        ),
+      ),
+    );
+  }
+}
